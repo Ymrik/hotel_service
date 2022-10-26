@@ -1,7 +1,6 @@
 package com.umarbariev.projects.hotel_service.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "additional_services")
@@ -18,9 +17,6 @@ public class AdditionalService {
     private String description;
     @Column(name = "enabled")
     private boolean enabled;
-
-    @ManyToMany(mappedBy = "additionalServices")
-    private List<SpecialOffer> specialOffers;
 
     public int getId() {
         return id;

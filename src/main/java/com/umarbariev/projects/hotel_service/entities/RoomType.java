@@ -76,4 +76,12 @@ public class RoomType {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
+
+    public List<RoomFeature> getRoomFeatures() {
+        return roomFeatures;
+    }
+
+    public void setRoomFeatures(List<RoomFeature> roomFeatures) {
+        this.roomFeatures = roomFeatures;
+    }
 }

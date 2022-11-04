@@ -1,12 +1,18 @@
 package com.umarbariev.projects.hotel_service.util.converters;
 
 import com.umarbariev.projects.hotel_service.dto.RoomTypeDto;
-import com.umarbariev.projects.hotel_service.entities.RoomClass;
 import com.umarbariev.projects.hotel_service.entities.RoomType;
 
+import java.util.stream.Collectors;
+
 public class RoomTypeConverter {
-    public static RoomTypeDto toDto(RoomType roomType){
+    public static RoomTypeDto toDto(RoomType roomType) {
         var roomClassDto = RoomClassConverter.toDto(roomType.getRoomClass());
+        var roomFeatureDto = roomType.getRoomFeatures()
+                .stream()
+                .map(RoomFeatureConverter::toDto)
+                .collect(Collectors.toList());
+
         return RoomTypeDto.builder()
                 .id(roomType.getId())
                 .square(roomType.getSquare())
@@ -14,10 +20,11 @@ public class RoomTypeConverter {
                 .basePrice(roomType.getBasePrice())
                 .capacity(roomType.getCapacity())
                 .photoUrl(roomType.getPhotoUrl())
+                .roomFeatures(roomFeatureDto)
                 .build();
     }
 
-    public static RoomType fromDto(RoomTypeDto roomTypeDto){
+    public static RoomType fromDto(RoomTypeDto roomTypeDto) {
         var roomType = new RoomType();
         var roomClass = RoomClassConverter.fromDto(roomTypeDto.getRoomClassDto());
         roomType.setId(roomTypeDto.getId());

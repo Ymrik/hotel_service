@@ -20,7 +20,7 @@ public class RoomTypeConverter {
                 .basePrice(roomType.getBasePrice())
                 .capacity(roomType.getCapacity())
                 .photoUrl(roomType.getPhotoUrl())
-                .roomFeatures(roomFeatureDto)
+                .roomFeaturesDto(roomFeatureDto)
                 .build();
     }
 

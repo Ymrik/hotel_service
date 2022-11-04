@@ -24,5 +24,5 @@ public class RoomTypeDto {
 
     private String photoUrl;
 
-    private List<RoomFeatureDto> roomFeatures;
+    private List<RoomFeatureDto> roomFeaturesDto;
 }

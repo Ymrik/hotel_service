@@ -14,7 +14,7 @@ public class Client {
     private User user;
     @Column(name = "name")
     private String name;
-    @Column(name = "username")
+    @Column(name = "surname")
     private String surname;
     @Column(name = "age")
     private int age;

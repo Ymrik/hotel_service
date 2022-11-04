@@ -6,6 +6,8 @@ import com.umarbariev.projects.hotel_service.entities.room.Room;
 import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

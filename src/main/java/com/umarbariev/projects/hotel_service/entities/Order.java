@@ -1,6 +1,8 @@
 package com.umarbariev.projects.hotel_service.entities;
 
 
+import com.umarbariev.projects.hotel_service.entities.room.Room;
+
 import javax.persistence.*;
 import java.sql.Date;
 

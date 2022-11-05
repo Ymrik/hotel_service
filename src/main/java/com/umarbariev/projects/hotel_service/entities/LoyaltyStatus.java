@@ -14,7 +14,6 @@ public class LoyaltyStatus {
     @Column(name = "discount")
     private Double discount;
 
-
     public int getId() {
         return id;
     }

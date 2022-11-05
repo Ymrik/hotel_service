@@ -1,6 +1,6 @@
 package com.umarbariev.projects.hotel_service.util.converters.room;
 
-import com.umarbariev.projects.hotel_service.entities.room.RoomTypeDto;
+import com.umarbariev.projects.hotel_service.dto.room.RoomTypeDto;
 import com.umarbariev.projects.hotel_service.entities.room.RoomType;
 
 import java.util.stream.Collectors;

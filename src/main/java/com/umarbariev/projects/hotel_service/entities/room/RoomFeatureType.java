@@ -3,13 +3,13 @@ package com.umarbariev.projects.hotel_service.entities.room;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "room_feature_types")
+@Table(name = "room_features_types")
 public class RoomFeatureType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_feature_type_id")
+    @Column(name = "room_features_type_id")
     private int id;
-    @Column(name = "room_feature_type_name")
+    @Column(name = "room_features_type_name")
     private String name;
 
     public int getId() {

@@ -1,4 +1,4 @@
-package com.umarbariev.projects.hotel_service.entities.room;
+package com.umarbariev.projects.hotel_service.dto.room;
 
 import com.umarbariev.projects.hotel_service.dto.room.RoomClassDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomFeatureDto;

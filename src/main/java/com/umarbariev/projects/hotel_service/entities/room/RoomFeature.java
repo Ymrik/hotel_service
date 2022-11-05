@@ -12,7 +12,7 @@ public class RoomFeature {
     @Column(name = "room_feature_name")
     private String name;
     @ManyToOne
-    @JoinColumn(name = "room_feature_type_id")
+    @JoinColumn(name = "room_features_type_id")
     private RoomFeatureType roomFeatureType;
 
     public int getId() {

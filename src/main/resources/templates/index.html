@@ -9,11 +9,14 @@
 <br>
 <br>
 <h3>Available rooms</h3>
-<br>
-<tbody>
-<tr th:each="room: ${availableRooms}">
-    <td th:text="${room.id}"/>
-</tr>
-</tbody>
+<table>
+    <tbody>
+    <tr th:each="room: ${availableRooms}">
+        <td th:text="${room.id}"/>
+        <td th:text="${room.roomTypeDto.name}"/>
+        <td th:text="${room.roomStatusDto.name}"/>
+    </tr>
+    </tbody>
+    </table>
 </body>
 </html>

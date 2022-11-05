@@ -21,6 +21,7 @@ public class RoomTypeConverter {
                 .capacity(roomType.getCapacity())
                 .photoUrl(roomType.getPhotoUrl())
                 .roomFeaturesDto(roomFeatureDto)
+                .name(roomType.getName())
                 .build();
     }
 
@@ -33,6 +34,7 @@ public class RoomTypeConverter {
         roomType.setBasePrice(roomTypeDto.getBasePrice());
         roomType.setCapacity(roomTypeDto.getCapacity());
         roomType.setPhotoUrl(roomTypeDto.getPhotoUrl());
+        roomType.setName(roomTypeDto.getName());
         return roomType;
     }
 }

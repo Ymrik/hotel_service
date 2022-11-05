@@ -16,6 +16,8 @@ import java.util.List;
 public class RoomTypeDto {
     private int id;
 
+    private String name;
+
     private int square;
 
     private RoomClassDto roomClassDto;

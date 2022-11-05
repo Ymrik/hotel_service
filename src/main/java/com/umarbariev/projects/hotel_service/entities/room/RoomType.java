@@ -10,6 +10,8 @@ public class RoomType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_type_id")
     private int id;
+    @Column(name = "room_type_name")
+    private String name;
     @Column(name = "square")
     private int square;
     @ManyToOne
@@ -28,6 +30,14 @@ public class RoomType {
             inverseJoinColumns = {@JoinColumn(name = "room_feature_id")}
     )
     private List<RoomFeature> roomFeatures;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;

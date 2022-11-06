@@ -9,12 +9,19 @@
 <br>
 <br>
 <h3>Available rooms</h3>
-<table>
+<table th:border="1">
     <tbody>
-    <tr th:each="room: ${availableRooms}">
-        <td th:text="${room.id}"/>
-        <td th:text="${room.roomTypeDto.name}"/>
-        <td th:text="${room.roomStatusDto.name}"/>
+    <tr>
+        <td>Name</td>
+        <td>Square</td>
+        <td>Capacity</td>
+        <td>Base price</td>
+    </tr>
+    <tr th:each="roomType: ${availableRoomTypes}">
+        <td th:text="${roomType.name}"/>
+        <td th:text="${roomType.square}"/>
+        <td th:text="${roomType.capacity}"/>
+        <td th:text="${roomType.basePrice}$"/>
     </tr>
     </tbody>
     </table>

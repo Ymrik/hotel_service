@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Find room</title>
 </head>
 <body>
-
+<h1>Suitable rooms</h1>
+<table th:border="1">
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td>Square</td>
+        <td>Capacity</td>
+        <td>Base price</td>
+    </tr>
+    <tr th:each="roomType: ${foundedRoomTypes}">
+        <td th:text="${roomType.name}"/>
+        <td th:text="${roomType.square}"/>
+        <td th:text="${roomType.capacity}"/>
+        <td th:text="${roomType.basePrice}"/>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

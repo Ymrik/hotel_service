@@ -26,6 +26,7 @@ public class MvcController {
 
     @RequestMapping("/findRoom")
     public String findRoom(@ModelAttribute SearchCriteriaDto searchCriteriaDto) {
+        var suitableRooms = roomTypeService.getAvailableRoomTypesBySearchCriteria(searchCriteriaDto);
         return "founded-rooms";
     }
 }

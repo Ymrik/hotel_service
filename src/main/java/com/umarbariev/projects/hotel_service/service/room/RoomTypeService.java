@@ -22,7 +22,11 @@ public class RoomTypeService {
     }
 
     public List<RoomTypeDto> getAvailableRoomTypesBySearchCriteria(SearchCriteriaDto searchCriteria) {
-        var allRooms = roomService.findAllRooms();
-
+        return roomService.findAllRoomsAvailableOnDate(searchCriteria.getArrivalDate())
+                .stream()
+                .map(x->x.getRoomTypeDto())
+                .filter(x->x.getCapacity()>=searchCriteria.getGuestsCount())
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

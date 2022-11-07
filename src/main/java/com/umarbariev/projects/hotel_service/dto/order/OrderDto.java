@@ -1,7 +1,8 @@
 package com.umarbariev.projects.hotel_service.dto.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.umarbariev.projects.hotel_service.dto.client.ClientDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomDto;
-import com.umarbariev.projects.hotel_service.entities.client.Client;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,15 +17,14 @@ import java.sql.Date;
 @NoArgsConstructor
 public class OrderDto {
     private int id;
-
-    //TODO: Switch to ClientDto
-    private Client client;
-
+    @JsonProperty("client")
+    private ClientDto clientDto;
+    @JsonProperty("room")
     private RoomDto roomDto;
 
     private Date ds;
 
     private Date de;
-
+    @JsonProperty("orderStatus")
     private OrderStatusDto orderStatusDto;
 }

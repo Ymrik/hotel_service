@@ -1,5 +1,6 @@
 package com.umarbariev.projects.hotel_service.dto.room;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,6 @@ public class RoomFeatureDto {
     private int id;
 
     private String name;
-
-    private RoomFeatureTypeDto roomFeatureType;
+    @JsonProperty("roomFeatureType")
+    private RoomFeatureTypeDto roomFeatureTypeDto;
 }

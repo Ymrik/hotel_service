@@ -1,8 +1,10 @@
 package com.umarbariev.projects.hotel_service.service.order;
 
+import com.umarbariev.projects.hotel_service.dto.order.OrderStatusDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomDto;
+import com.umarbariev.projects.hotel_service.entities.room.Room;
 import com.umarbariev.projects.hotel_service.repositories.order.OrderRepository;
-import com.umarbariev.projects.hotel_service.util.converters.room.RoomConverter;
+import com.umarbariev.projects.hotel_service.util.converters.BasicConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,9 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     public Date checkReleaseDate(RoomDto roomDto) {
-        var lastOrder = orderRepository.findLastByRoom(RoomConverter.fromDto(roomDto)).orElse(null);
+        var lastOrder = orderRepository.findLastByRoom(BasicConverter.convert(roomDto, Room.class)).orElse(null);
         if(lastOrder==null) return null;
-        if(lastOrder.getOrderStatus())
+        if(lastOrder.getOrderStatus().equals(OrderStatusDto.ORDER_STATUS_FINISHED)) return null;
+        return lastOrder.getDe();
     }
 }

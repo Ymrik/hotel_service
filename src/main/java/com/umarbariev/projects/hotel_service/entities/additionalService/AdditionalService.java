@@ -1,4 +1,4 @@
-package com.umarbariev.projects.hotel_service.entities;
+package com.umarbariev.projects.hotel_service.entities.additionalService;
 
 import javax.persistence.*;
 

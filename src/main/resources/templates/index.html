@@ -10,10 +10,10 @@
 <input type="button" value="Main Menu" onclick="window.location.href='/mainMenu'">
 <br>
 <h4>Find a Room</h4>
-<form th:action="@{/findRoomLink}" th:object="${someObject}" method="get">
-    Arrival <input type="text"/>
-    Departure <input type="text">
-    Guests <input type="text">
+<form th:action="@{/findRoom}" th:object="${searchCriteria}" method="get">
+    Arrival <input type="date" th:field="*{arrivalDate}">
+    Departure <input type="date" th:field="*{departureDate}">
+    Guests <input type="text" th:field="*{guestsCount}">
     <input type="submit" value="Find room"/>
 </form>
 <h3>Available rooms</h3>

@@ -1,15 +1,15 @@
-package com.umarbariev.projects.hotel_service.entities;
+package com.umarbariev.projects.hotel_service.entities.client;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order_statuses")
-public class OrderStatus {
+@Table(name = "sex")
+public class Sex {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_status_id")
+    @Column(name = "sex_id")
     private int id;
-    @Column(name = "order_status_name")
+    @Column(name = "sex_name")
     private String name;
 
     public int getId() {

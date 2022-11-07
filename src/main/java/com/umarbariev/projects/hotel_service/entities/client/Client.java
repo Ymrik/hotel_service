@@ -1,4 +1,6 @@
-package com.umarbariev.projects.hotel_service.entities;
+package com.umarbariev.projects.hotel_service.entities.client;
+
+import com.umarbariev.projects.hotel_service.entities.User;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
 package com.umarbariev.projects.hotel_service.entities.special_offer;
 
-import com.umarbariev.projects.hotel_service.entities.AdditionalService;
+import com.umarbariev.projects.hotel_service.entities.additionalService.AdditionalService;
 
 import javax.persistence.*;
 

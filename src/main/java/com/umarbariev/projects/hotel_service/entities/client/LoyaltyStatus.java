@@ -1,4 +1,4 @@
-package com.umarbariev.projects.hotel_service.entities;
+package com.umarbariev.projects.hotel_service.entities.client;
 
 import javax.persistence.*;
 
@@ -13,6 +13,17 @@ public class LoyaltyStatus {
     private String name;
     @Column(name = "discount")
     private Double discount;
+    @Column(name = "orders_count")
+    private int ordersCount;
+
+
+    public int getOrdersCount() {
+        return ordersCount;
+    }
+
+    public void setOrdersCount(int ordersCount) {
+        this.ordersCount = ordersCount;
+    }
 
     public int getId() {
         return id;

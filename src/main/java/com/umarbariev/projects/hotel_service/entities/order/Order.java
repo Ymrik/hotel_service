@@ -1,25 +1,32 @@
-package com.umarbariev.projects.hotel_service.entities;
+package com.umarbariev.projects.hotel_service.entities.order;
+
+
+import com.umarbariev.projects.hotel_service.entities.client.Client;
+import com.umarbariev.projects.hotel_service.entities.room.Room;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "clients_additional_services")
-public class ClientAdditionalService {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_additional_service_id")
+    @Column(name = "order_id")
     private int id;
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
     @ManyToOne
-    @JoinColumn(name = "additional_service_id")
-    private AdditionalService additionalService;
+    @JoinColumn(name = "room_id")
+    private Room room;
     @Column(name = "ds")
     private Date ds;
     @Column(name = "de")
     private Date de;
+    @ManyToOne
+    @JoinColumn(name = "order_status_id")
+    private OrderStatus orderStatus;
 
     public int getId() {
         return id;
@@ -37,12 +44,12 @@ public class ClientAdditionalService {
         this.client = client;
     }
 
-    public AdditionalService getAdditionalService() {
-        return additionalService;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setAdditionalService(AdditionalService additionalService) {
-        this.additionalService = additionalService;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public Date getDs() {
@@ -59,5 +66,13 @@ public class ClientAdditionalService {
 
     public void setDe(Date de) {
         this.de = de;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

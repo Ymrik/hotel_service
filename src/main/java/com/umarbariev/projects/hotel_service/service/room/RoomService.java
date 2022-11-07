@@ -1,12 +1,14 @@
 package com.umarbariev.projects.hotel_service.service.room;
 
 import com.umarbariev.projects.hotel_service.dto.room.RoomDto;
+import com.umarbariev.projects.hotel_service.dto.room.RoomStatusDto;
 import com.umarbariev.projects.hotel_service.repositories.room.RoomRepository;
 import com.umarbariev.projects.hotel_service.util.converters.room.RoomConverter;
 import com.umarbariev.projects.hotel_service.util.converters.room.RoomStatusConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,5 +26,20 @@ public class RoomService {
                 .stream()
                 .map(RoomConverter::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<RoomDto> findAllRooms() {
+        return roomRepository.findAll()
+                .stream()
+                .map(RoomConverter::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<RoomDto> findAllRoomsAvailableOnDate(Date date) {
+        var allRooms = findAllRooms();
+        for (RoomDto roomDto: allRooms) {
+            if (roomDto.getRoomStatusDto().equals(RoomStatusDto.ROOM_STATUS_AVAILABLE)) continue;
+
+        }
     }
 }

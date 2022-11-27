@@ -25,6 +25,9 @@ public class OrderDto {
     private Date ds;
 
     private Date de;
+
+    private int guestsCount;
+
     @JsonProperty("orderStatus")
     private OrderStatusDto orderStatusDto;
 }

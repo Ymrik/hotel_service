@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New order</title>
+</head>
+<body>
+<h1>New order</h1>
+<form th:action="@{/newOrder}" th:object="${orderRequest}">
+    <input type="hidden" th:field="*{roomTypeId}">
+    <p>Check-In Date: <input type="date" th:field="*{checkInDate}"></p>
+    <p>Check-Out Date: <input type="date" th:field="*{checkOutDate}"></p>
+    <p>Guests: <input type=text th:field="*{guestsCount}"></p>
+    <input type="submit" value="Make Order">
+</form>
+</body>
+</html>

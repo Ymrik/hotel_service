@@ -9,6 +9,8 @@
 <br>
 <input type="button" value="Main Menu" onclick="window.location.href='/mainMenu'">
 <br>
+<input type="button" value="Booking" onclick="window.location.href='/chooseRoomType'">
+<br>
 <h4>Find a Room</h4>
 <form th:action="@{/findRoom}" th:object="${searchCriteria}" method="get">
     Arrival <input type="date" th:field="*{arrivalDate}">
@@ -24,12 +26,18 @@
         <td>Square</td>
         <td>Capacity</td>
         <td>Base price</td>
+        <td>Order</td>
     </tr>
     <tr th:each="roomType: ${availableRoomTypes}">
         <td th:text="${roomType.name}"/>
         <td th:text="${roomType.square}"/>
         <td th:text="${roomType.capacity}"/>
         <td th:text="${roomType.basePrice}"/>
+        <td>
+            <a th:href="@{/makeOrder(roomTypeId=*{roomType.id})}">
+                <input type="button" value="Order"/>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

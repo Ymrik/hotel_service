@@ -4,9 +4,11 @@ import com.umarbariev.projects.hotel_service.dto.order.OrderDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
 import com.umarbariev.projects.hotel_service.dto.order.OrderStatusDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomDto;
+import com.umarbariev.projects.hotel_service.dto.room.RoomStatusDto;
 import com.umarbariev.projects.hotel_service.entities.order.Order;
 import com.umarbariev.projects.hotel_service.entities.order.OrderStatus;
 import com.umarbariev.projects.hotel_service.entities.room.Room;
+import com.umarbariev.projects.hotel_service.entities.room.RoomStatus;
 import com.umarbariev.projects.hotel_service.repositories.order.OrderRepository;
 import com.umarbariev.projects.hotel_service.service.room.RoomService;
 import com.umarbariev.projects.hotel_service.util.converters.BasicConverter;
@@ -38,6 +40,10 @@ public class OrderService {
                 .de(orderRequest.getCheckOutDate())
                 .guestsCount(orderRequest.getGuestsCount())
                 .build();
+        var roomStatusBooked = BasicConverter.convert(RoomStatusDto.ROOM_STATUS_BOOKED, RoomStatus.class);
+        room.setRoomStatus(roomStatusBooked);
+        roomService.createOrUpdateRoom(room);
+
         return BasicConverter.convert(orderRepository.save(order), OrderDto.class);
     }
 }

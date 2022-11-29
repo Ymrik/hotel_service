@@ -6,6 +6,16 @@
 </head>
 <body>
 <h1>New order</h1>
+<h3>Choosed Room</h3>
+<p th:text="${roomType.name}"></p>
+<p th:text="'Class: ' + ${roomType.roomClassDto.name}"></p>
+<p th:text="'Square: ' + ${roomType.square}"></p>
+<p th:text="'Capacity: ' + ${roomType.capacity}"></p>
+<a th:href="@{/roomDetails(roomTypeId=*{roomType.id})}">
+    <input type="button" value="Details"/>
+</a>
+<br>
+<h3>Please, specify order details</h3>
 <form th:action="@{/newOrder}" th:object="${orderRequest}">
     <input type="hidden" th:field="*{roomTypeId}">
     <p>Check-In Date: <input type="date" th:field="*{checkInDate}"></p>

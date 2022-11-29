@@ -4,6 +4,7 @@ import com.umarbariev.projects.hotel_service.dto.SearchCriteriaDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomStatusDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomTypeDto;
+import com.umarbariev.projects.hotel_service.entities.room.Room;
 import com.umarbariev.projects.hotel_service.entities.room.RoomStatus;
 import com.umarbariev.projects.hotel_service.entities.room.RoomType;
 import com.umarbariev.projects.hotel_service.exception.NoSuchRoomTypeException;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,7 @@ public class RoomService {
         return roomStatusAvailable == null ? null : roomRepository.findAllByRoomStatus(BasicConverter.convert(roomStatusAvailable, RoomStatus.class))
                 .stream()
                 .map(x -> BasicConverter.convert(x, RoomDto.class))
+                .sorted(Comparator.comparing(o -> o.getRoomTypeDto().getBasePrice()))
                 .collect(Collectors.toList());
     }
 
@@ -58,6 +61,7 @@ public class RoomService {
             var releaseDate = orderService.checkReleaseDate(roomDto);
             if (releaseDate.before(date)) availableRooms.add(roomDto);
         }
+        availableRooms.sort(Comparator.comparing(o -> o.getRoomTypeDto().getBasePrice()));
         return availableRooms;
     }
 
@@ -73,17 +77,24 @@ public class RoomService {
     public List<RoomTypeDto> getAllAvailableRoomTypes() {
         return getAllAvailableRooms()
                 .stream()
-                .map(x -> x.getRoomTypeDto())
+                .map(RoomDto::getRoomTypeDto)
                 .distinct()
+                .sorted(Comparator.comparing(RoomTypeDto::getBasePrice))
                 .collect(Collectors.toList());
     }
 
     public List<RoomTypeDto> getAvailableRoomTypesBySearchCriteria(SearchCriteriaDto searchCriteria) {
         return findAllRoomsAvailableOnDate(searchCriteria.getArrivalDate())
                 .stream()
-                .map(x -> x.getRoomTypeDto())
+                .map(RoomDto::getRoomTypeDto)
                 .filter(x -> x.getCapacity() >= searchCriteria.getGuestsCount())
                 .distinct()
+                .sorted(Comparator.comparing(RoomTypeDto::getBasePrice))
                 .collect(Collectors.toList());
+    }
+
+    public RoomDto createOrUpdateRoom(Room room) {
+        var roomSaved = roomRepository.save(room);
+        return BasicConverter.convert(roomSaved, RoomDto.class);
     }
 }

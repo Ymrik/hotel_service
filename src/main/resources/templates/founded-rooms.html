@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Find room</title>
@@ -19,6 +19,15 @@
         <td th:text="${roomType.square}"/>
         <td th:text="${roomType.capacity}"/>
         <td th:text="${roomType.basePrice}"/>
+        <td>
+            <form th:action="@{/makeOrder}" th:object="${orderRequest}">
+                <input type="hidden" th:field="*{checkInDate}">
+                <input type="hidden" th:field="*{checkOutDate}">
+                <input type="hidden" th:field="*{guestsCount}">
+                <input type="hidden" class="form-control" th:value="${roomType.id}" id="roomTypeId" name="roomTypeId">
+                <input type="submit" value="Order">
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

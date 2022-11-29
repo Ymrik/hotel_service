@@ -32,6 +32,19 @@ public class Order {
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
 
+    public Order() {
+    }
+
+    public Order(int id, Client client, Room room, Date ds, Date de, int guestsCount, OrderStatus orderStatus) {
+        this.id = id;
+        this.client = client;
+        this.room = room;
+        this.ds = ds;
+        this.de = de;
+        this.guestsCount = guestsCount;
+        this.orderStatus = orderStatus;
+    }
+
     public int getGuestsCount() {
         return guestsCount;
     }

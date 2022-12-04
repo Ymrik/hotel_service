@@ -1,7 +1,9 @@
 package com.umarbariev.projects.hotel_service.controllers;
 
 import com.umarbariev.projects.hotel_service.dto.SearchCriteriaDto;
+import com.umarbariev.projects.hotel_service.dto.client.UserClientDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
+import com.umarbariev.projects.hotel_service.service.client.ClientService;
 import com.umarbariev.projects.hotel_service.service.order.OrderService;
 import com.umarbariev.projects.hotel_service.service.room.RoomService;
 import com.umarbariev.projects.hotel_service.service.room.RoomTypeService;
@@ -20,6 +22,8 @@ public class MvcController {
     private OrderService orderService;
     @Autowired
     private RoomTypeService roomTypeService;
+    @Autowired
+    private ClientService clientService;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -70,5 +74,17 @@ public class MvcController {
         var roomType = roomTypeService.findById(roomTypeId);
         model.addAttribute("roomType", roomType);
         return "room-type-details";
+    }
+
+    @RequestMapping("/registration")
+    private String registration(Model model) {
+        model.addAttribute("userClient", new UserClientDto());
+        return "registration";
+    }
+
+    @RequestMapping("/newClient")
+    public String addNewClient(@ModelAttribute(name = "userClient") UserClientDto userClientDto) {
+        var client = clientService.addNewClient(userClientDto);
+        return "redirect:";
     }
 }

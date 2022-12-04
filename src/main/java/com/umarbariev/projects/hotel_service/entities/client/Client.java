@@ -3,6 +3,7 @@ package com.umarbariev.projects.hotel_service.entities.client;
 import com.umarbariev.projects.hotel_service.entities.User;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "clients")
@@ -18,8 +19,8 @@ public class Client {
     private String name;
     @Column(name = "surname")
     private String surname;
-    @Column(name = "age")
-    private int age;
+    @Column(name = "birth_date")
+    private Date birthDate;
     @ManyToOne
     @JoinColumn(name = "sex_id")
     private Sex sex;
@@ -63,12 +64,12 @@ public class Client {
         this.surname = surname;
     }
 
-    public int getAge() {
-        return age;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Sex getSex() {

@@ -1,11 +1,13 @@
 package com.umarbariev.projects.hotel_service.dto.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.umarbariev.projects.hotel_service.dto.UserDto;
+import com.umarbariev.projects.hotel_service.dto.user.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +22,7 @@ public class ClientDto {
 
     private String surname;
 
-    private int age;
+    private Date birthDate;
     @JsonProperty("sex")
     private SexDto sexDto;
 

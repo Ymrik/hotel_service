@@ -2,6 +2,7 @@ package com.umarbariev.projects.hotel_service.service.client;
 
 import com.umarbariev.projects.hotel_service.dto.client.ClientDto;
 import com.umarbariev.projects.hotel_service.dto.client.UserClientDto;
+import com.umarbariev.projects.hotel_service.entities.User;
 import com.umarbariev.projects.hotel_service.entities.client.Client;
 import com.umarbariev.projects.hotel_service.repositories.client.ClientRepository;
 import com.umarbariev.projects.hotel_service.service.user.UserService;
@@ -25,5 +26,14 @@ public class ClientService {
         var client = BasicConverter.convert(clientDto, Client.class);
         var clientSaved = clientRepository.save(client);
         return BasicConverter.convert(clientSaved, ClientDto.class);
+    }
+
+    public ClientDto findClientByUsername(String username) {
+        var client = clientRepository.findByUserUsername(username).orElse(null);
+        return BasicConverter.convert(client, ClientDto.class);
+    }
+
+    public Client getById(int clientId) {
+        return clientRepository.getById(clientId);
     }
 }

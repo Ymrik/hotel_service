@@ -10,6 +10,7 @@ import com.umarbariev.projects.hotel_service.entities.order.OrderStatus;
 import com.umarbariev.projects.hotel_service.entities.room.Room;
 import com.umarbariev.projects.hotel_service.entities.room.RoomStatus;
 import com.umarbariev.projects.hotel_service.repositories.order.OrderRepository;
+import com.umarbariev.projects.hotel_service.service.client.ClientService;
 import com.umarbariev.projects.hotel_service.service.room.RoomService;
 import com.umarbariev.projects.hotel_service.util.converters.BasicConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private ClientService clientService;
 
     public Date checkReleaseDate(RoomDto roomDto) {
         var lastOrder = orderRepository.findLastByRoom(BasicConverter.convert(roomDto, Room.class)).orElse(null);
@@ -32,10 +35,12 @@ public class OrderService {
     }
 
     public OrderDto makeNewOrder(OrderRequest orderRequest) {
+        var client = clientService.getById(orderRequest.getClientId());
         var room = BasicConverter.convert(roomService.findAvailableRoomByRoomTypeId(orderRequest.getRoomTypeId()), Room.class);
         var order = Order.builder()
                 .orderStatus(BasicConverter.convert(OrderStatusDto.ORDER_STATUS_ACTIVE, OrderStatus.class))
                 .room(room)
+                .client(client)
                 .ds(orderRequest.getCheckInDate())
                 .de(orderRequest.getCheckOutDate())
                 .guestsCount(orderRequest.getGuestsCount())

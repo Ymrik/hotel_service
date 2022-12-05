@@ -12,6 +12,8 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 public class OrderRequest {
+    private int clientId;
+
     private int roomTypeId;
 
     private Date checkInDate;

@@ -3,6 +3,7 @@ package com.umarbariev.projects.hotel_service.controllers;
 import com.umarbariev.projects.hotel_service.dto.SearchCriteriaDto;
 import com.umarbariev.projects.hotel_service.dto.client.UserClientDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
+import com.umarbariev.projects.hotel_service.entities.User;
 import com.umarbariev.projects.hotel_service.service.client.ClientService;
 import com.umarbariev.projects.hotel_service.service.order.OrderService;
 import com.umarbariev.projects.hotel_service.service.room.RoomService;
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.security.Principal;
 
 @Controller
 public class MvcController {
@@ -26,10 +29,11 @@ public class MvcController {
     private ClientService clientService;
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(Model model, Principal principal) {
         var availableRoomsTypes = roomService.getAllAvailableRoomTypes();
         model.addAttribute("availableRoomTypes", availableRoomsTypes);
         model.addAttribute("searchCriteria", new SearchCriteriaDto());
+        model.addAttribute("user", principal);
         return "index";
     }
 
@@ -64,7 +68,9 @@ public class MvcController {
     }
 
     @RequestMapping("/newOrder")
-    private String newOrder(@ModelAttribute OrderRequest orderRequest, Model model) {
+    private String newOrder(@ModelAttribute OrderRequest orderRequest, Model model, Principal principal) {
+        var client = clientService.findClientByUsername(principal.getName());
+        orderRequest.setClientId(client.getId());
         orderService.makeNewOrder(orderRequest);
         return "redirect:";
     }

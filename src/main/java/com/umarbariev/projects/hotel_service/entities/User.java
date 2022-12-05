@@ -18,7 +18,7 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_authorities",
             joinColumns = {@JoinColumn(name = "username")},

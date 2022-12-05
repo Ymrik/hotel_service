@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Hotel Service</title>
@@ -7,8 +8,16 @@
 <body>
 <h1>Avenue Montaigne Hotel</h1>
 <br>
-<input type="button" value="Login" onclick="window.location.href='/login'">
-<br>
+<div sec:authorize="!isAuthenticated()">
+    <input type="button" value="Login" onclick="window.location.href='/login'">
+    <br>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <h3 th:text="${user.getName()}"></h3>
+    <input type="button" value="My account">
+    <br/>
+    <input type="button" value="Log Out" onclick="window.location.href='/logout'"/>
+</div>
 <input type="button" value="Main Menu" onclick="window.location.href='/mainMenu'">
 <br>
 <input type="button" value="Booking" onclick="window.location.href='/chooseRoomType'">

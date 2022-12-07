@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal account</title>
+</head>
+<body>
+<h1>Personal account</h1>
+<br>
+<h3 th:text="${client.userDto.username}"></h3>
+<div th:text="${client.name} + ' ' + ${client.surname}"></div>
+<br>
+<input type="button" value="My Info" onclick="window.location.href='/clientInfo'">
+<br>
+<input type="button" value="Loyalty Status" onclick="window.location.href='/loyaltyStatus'">
+<br>
+<input type="button" value="Settings" onclick="window.location.href='/settings'">
+<br>
+<input type="button" value="Log Out" onclick="window.location.href='/logout'">
+<br>
+<br>
+<input type="button" value="Main Menu" onclick="window.location.href='/'">
+</body>
+</html>

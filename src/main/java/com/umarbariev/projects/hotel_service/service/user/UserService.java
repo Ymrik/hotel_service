@@ -40,4 +40,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         return true;
     }
+
+    public boolean changeUser(UserDto userDto) {
+        var user = BasicConverter.convert(userDto, User.class);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return true;
+    }
 }

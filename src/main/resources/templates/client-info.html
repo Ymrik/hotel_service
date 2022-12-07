@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Info</title>
+</head>
+<body>
+<h1>Client info</h1>
+<br>
+<p th:text="'Username: ' + ${client.userDto.username}"></p>
+<input type="button" value="Change Password" onclick="window.location.href='/changePassword'">
+<p th:text="'Name: ' + ${client.name}"></p>
+<p th:text="'Surname: ' + ${client.surname}"></p>
+<p th:text="'Birth Date: ' + ${client.birthDate}"></p>
+<p th:text="'Sex: ' + ${client.sexDto.name}"></p>
+<p th:text="'Phone Number: ' + ${client.phoneNumber}"></p>
+<p th:text="'Email: ' + ${client.email}"></p>
+<p><input type="button" value="Change Info" onclick="window.location.href='/changeInfo'"></p>
+<br>
+<p><input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'"></p>
+<p><input type="button" value="Main Menu" onclick="window.location.href='/'"></p>
+<p ></p>
+</body>
+</html>

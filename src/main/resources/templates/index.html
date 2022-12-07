@@ -14,7 +14,7 @@
 </div>
 <div sec:authorize="isAuthenticated()">
     <h3 th:text="${user.getName()}"></h3>
-    <input type="button" value="My account">
+    <input type="button" value="My account" onclick="window.location.href='/personalAccount'">
     <br/>
     <input type="button" value="Log Out" onclick="window.location.href='/logout'"/>
 </div>

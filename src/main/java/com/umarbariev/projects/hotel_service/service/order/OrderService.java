@@ -1,5 +1,6 @@
 package com.umarbariev.projects.hotel_service.service.order;
 
+import com.umarbariev.projects.hotel_service.dto.client.ClientDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
 import com.umarbariev.projects.hotel_service.dto.order.OrderStatusDto;
@@ -29,8 +30,8 @@ public class OrderService {
 
     public Date checkReleaseDate(RoomDto roomDto) {
         var lastOrder = orderRepository.findLastByRoom(BasicConverter.convert(roomDto, Room.class)).orElse(null);
-        if(lastOrder==null) return null;
-        if(lastOrder.getOrderStatus().equals(OrderStatusDto.ORDER_STATUS_FINISHED)) return null;
+        if (lastOrder == null) return null;
+        if (lastOrder.getOrderStatus().equals(OrderStatusDto.ORDER_STATUS_FINISHED)) return null;
         return lastOrder.getDe();
     }
 
@@ -50,5 +51,14 @@ public class OrderService {
         roomService.createOrUpdateRoom(room);
 
         return BasicConverter.convert(orderRepository.save(order), OrderDto.class);
+    }
+
+    public int getOrdersCountForClient(ClientDto clientDto) {
+        return getOrdersCountByClientId(clientDto.getId());
+    }
+
+    public int getOrdersCountByClientId(int clientId) {
+        var ordersForClient = orderRepository.getOrdersByClientId(clientId);
+        return ordersForClient.size();
     }
 }

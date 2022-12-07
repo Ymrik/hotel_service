@@ -1,13 +1,18 @@
 package com.umarbariev.projects.hotel_service.controllers;
 
 import com.umarbariev.projects.hotel_service.dto.SearchCriteriaDto;
+import com.umarbariev.projects.hotel_service.dto.client.ClientDto;
 import com.umarbariev.projects.hotel_service.dto.client.UserClientDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
+import com.umarbariev.projects.hotel_service.dto.user.UserDto;
 import com.umarbariev.projects.hotel_service.entities.User;
 import com.umarbariev.projects.hotel_service.service.client.ClientService;
+import com.umarbariev.projects.hotel_service.service.client.SexService;
 import com.umarbariev.projects.hotel_service.service.order.OrderService;
 import com.umarbariev.projects.hotel_service.service.room.RoomService;
 import com.umarbariev.projects.hotel_service.service.room.RoomTypeService;
+import com.umarbariev.projects.hotel_service.service.user.UserService;
+import com.umarbariev.projects.hotel_service.util.converters.BasicConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +32,10 @@ public class MvcController {
     private RoomTypeService roomTypeService;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private SexService sexService;
 
     @RequestMapping("/")
     public String index(Model model, Principal principal) {
@@ -92,5 +101,61 @@ public class MvcController {
     public String addNewClient(@ModelAttribute(name = "userClient") UserClientDto userClientDto) {
         var client = clientService.addNewClient(userClientDto);
         return "redirect:";
+    }
+
+    @RequestMapping("/personalAccount")
+    public String personalAccount(Principal principal, Model model) {
+        var client = clientService.findClientByUsername(principal.getName());
+        model.addAttribute("client", client);
+        return "personal-account";
+    }
+
+    @RequestMapping("/clientInfo")
+    public String clientInfo(Principal principal, Model model) {
+        var client = clientService.findClientByUsername(principal.getName());
+        model.addAttribute("client", client);
+        return "client-info";
+    }
+
+    @RequestMapping("/changePassword")
+    public String changePassword(Principal principal, Model model) {
+        var user = (User) userService.loadUserByUsername(principal.getName());
+        model.addAttribute("user", user);
+        return "change-password";
+    }
+
+    @RequestMapping("/updateUser")
+    public String updateUser(@ModelAttribute User user) {
+        userService.changeUser(BasicConverter.convert(user, UserDto.class));
+        return "redirect:/personalAccount";
+    }
+
+    @RequestMapping("/loyaltyStatus")
+    public String loyaltyStatus(Principal principal, Model model) {
+        var client = clientService.findClientByUsername(principal.getName());
+        var infoForNextLoyalStatus = clientService.getOrdersCountUntilNextLoyaltyStatus(client);
+        model.addAttribute("client", client);
+        model.addAttribute("infoForNextStatus", infoForNextLoyalStatus);
+        return "loyalty-status";
+    }
+
+    @RequestMapping("/changeInfo")
+    public String changeInfo(Principal principal, Model model) {
+        var client = clientService.findClientByUsername(principal.getName());
+        model.addAttribute("client", client);
+        return "change-info";
+    }
+
+    @RequestMapping("/updateClient")
+    public String updateClient(@ModelAttribute ClientDto clientDto) {
+        var sex = sexService.findByName(clientDto.getSexDto().getName());
+        clientDto.setSexDto(sex);
+        clientService.saveClient(clientDto);
+        return "redirect:/clientInfo";
+    }
+
+    @RequestMapping("/settings")
+    public String settings() {
+        return "settings";
     }
 }

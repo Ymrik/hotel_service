@@ -3,7 +3,9 @@ package com.umarbariev.projects.hotel_service.entities.order;
 
 import com.umarbariev.projects.hotel_service.entities.client.Client;
 import com.umarbariev.projects.hotel_service.entities.room.Room;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,6 +13,8 @@ import java.sql.Date;
 @Entity
 @Table(name = "orders")
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,22 +32,11 @@ public class Order {
     private Date de;
     @Column(name = "guests_count")
     private int guestsCount;
+    @Column(name = "cost")
+    private Double cost;
     @ManyToOne
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
-
-    public Order() {
-    }
-
-    public Order(int id, Client client, Room room, Date ds, Date de, int guestsCount, OrderStatus orderStatus) {
-        this.id = id;
-        this.client = client;
-        this.room = room;
-        this.ds = ds;
-        this.de = de;
-        this.guestsCount = guestsCount;
-        this.orderStatus = orderStatus;
-    }
 
     public int getGuestsCount() {
         return guestsCount;
@@ -87,6 +80,14 @@ public class Order {
 
     public Date getDe() {
         return de;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 
     public void setDe(Date de) {

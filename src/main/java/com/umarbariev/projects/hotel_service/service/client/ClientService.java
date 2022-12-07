@@ -42,7 +42,7 @@ public class ClientService {
         return clientRepository.getById(clientId);
     }
 
-    public InfoForNextLoyalStatusDto getOrdersCountUntilNextLoyaltyStatus(ClientDto clientDto) {
+    public InfoForNextLoyalStatusDto getInfoUntilNextLoyaltyStatus(ClientDto clientDto) {
         var infoForNextLoyalStatus = new InfoForNextLoyalStatusDto();
         var currentStatus = clientDto.getLoyaltyStatusDto();
         infoForNextLoyalStatus.setClient(clientDto);
@@ -60,5 +60,9 @@ public class ClientService {
         var client = BasicConverter.convert(clientDto, Client.class);
         var clientSaved = clientRepository.save(client);
         return BasicConverter.convert(clientSaved, ClientDto.class);
+    }
+
+    public Client save(Client client) {
+        return clientRepository.save(client);
     }
 }

@@ -9,6 +9,7 @@
 <form th:object="${client}" th:action="@{/updateClient}">
     <input type="hidden" th:field="*{id}">
     <input type="hidden" th:field="*{userDto.username}">
+    <input type="hidden" th:field="*{loyaltyStatusDto.id}">
     <p>Name: <input type="text" th:field="*{name}"></p>
     <p>Surname: <input type="text" th:field="*{surname}"></p>
     <p>Birth Date: <input type="date" th:field="*{birthDate}"></p>

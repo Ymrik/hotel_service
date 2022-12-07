@@ -28,6 +28,8 @@ public class OrderDto {
 
     private int guestsCount;
 
+    private Double cost;
+
     @JsonProperty("orderStatus")
     private OrderStatusDto orderStatusDto;
 }

@@ -133,7 +133,7 @@ public class MvcController {
     @RequestMapping("/loyaltyStatus")
     public String loyaltyStatus(Principal principal, Model model) {
         var client = clientService.findClientByUsername(principal.getName());
-        var infoForNextLoyalStatus = clientService.getOrdersCountUntilNextLoyaltyStatus(client);
+        var infoForNextLoyalStatus = clientService.getInfoUntilNextLoyaltyStatus(client);
         model.addAttribute("client", client);
         model.addAttribute("infoForNextStatus", infoForNextLoyalStatus);
         return "loyalty-status";

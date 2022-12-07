@@ -6,6 +6,7 @@ import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
 import com.umarbariev.projects.hotel_service.dto.order.OrderStatusDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomDto;
 import com.umarbariev.projects.hotel_service.dto.room.RoomStatusDto;
+import com.umarbariev.projects.hotel_service.entities.client.Client;
 import com.umarbariev.projects.hotel_service.entities.client.LoyaltyStatus;
 import com.umarbariev.projects.hotel_service.entities.order.Order;
 import com.umarbariev.projects.hotel_service.entities.order.OrderStatus;
@@ -21,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -79,7 +82,32 @@ public class OrderService {
     }
 
     public int getOrdersCountByClientId(int clientId) {
-        var ordersForClient = orderRepository.getOrdersByClientId(clientId);
+        var ordersForClient = getOrdersByClientId(clientId);
         return ordersForClient.size();
+    }
+
+    public List<OrderDto> getActiveOrdersByClient(ClientDto client) {
+        return getOrdersByClient(client)
+                .stream()
+                .filter(order -> order.getOrderStatusDto().getId() == 2)
+                .collect(Collectors.toList());
+    }
+
+    public List<OrderDto> getFinishedOrdersByClient(ClientDto client) {
+        return getOrdersByClient(client)
+                .stream()
+                .filter(order -> order.getOrderStatusDto().getId() == 3)
+                .collect(Collectors.toList());
+    }
+
+    public List<OrderDto> getOrdersByClient(ClientDto client) {
+        return getOrdersByClientId(client.getId());
+    }
+
+    public List<OrderDto> getOrdersByClientId(int clientId) {
+        return orderRepository.getOrdersByClientId(clientId)
+                .stream()
+                .map(order -> BasicConverter.convert(order, OrderDto.class))
+                .collect(Collectors.toList());
     }
 }

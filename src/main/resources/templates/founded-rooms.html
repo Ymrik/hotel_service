@@ -15,7 +15,12 @@
         <td>Base price</td>
     </tr>
     <tr th:each="roomType: ${foundedRoomTypes}">
-        <td th:text="${roomType.name}"/>
+        <td>
+            <b th:text="${roomType.name}"></b>
+            <a th:href="@{/roomDetails(roomTypeId=*{roomType.id})}">
+                <input type="button" value="Details"/>
+            </a>
+        </td>
         <td th:text="${roomType.square}"/>
         <td th:text="${roomType.capacity}"/>
         <td th:text="${roomType.basePrice}"/>
@@ -31,5 +36,12 @@
     </tr>
     </tbody>
 </table>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
 </body>
 </html>

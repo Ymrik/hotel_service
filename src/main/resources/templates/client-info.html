@@ -17,6 +17,13 @@
 <p th:text="'Email: ' + ${client.email}"></p>
 <p><input type="button" value="Change Info" onclick="window.location.href='/changeInfo'"></p>
 <br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+<br>
 <p><input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'"></p>
 <p><input type="button" value="Main Menu" onclick="window.location.href='/'"></p>
 <p ></p>

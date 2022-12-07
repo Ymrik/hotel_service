@@ -11,8 +11,16 @@
 <p th:text="'Your discount is ' +  ${infoForNextStatus.current.discount} + ' %'"></p>
 <p th:text="'Next Loyalty Status is ' + ${infoForNextStatus.next.name}"></p>
 <p th:text="'Order until Loyalty Status:' + ${infoForNextStatus.next.name} + ' - ' + ${infoForNextStatus.ordersForNextStatus}"></p>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+<br>
 <input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'">
 <br>
 <input type="button" value="Main Page" onclick="window.location.href='/'">
+
 </body>
 </html>

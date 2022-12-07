@@ -8,6 +8,13 @@
 <h1>Settings</h1>
 <p><input type="button" value="Change Password" onclick="window.location.href='/changePassword'"></p>
 <p><input type="button" value="Change Personal Info" onclick="window.location.href='/changeInfo'"></p>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+<br>
 <p><input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'"></p>
 <p><input type="button" value="Main Menu" onclick="window.location.href='/'"></p>
 </body>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Controller
@@ -157,5 +158,21 @@ public class MvcController {
     @RequestMapping("/settings")
     public String settings() {
         return "settings";
+    }
+
+    @RequestMapping("/clientOrders")
+    public String clientOrders(Principal principal, Model model) {
+        var client = clientService.findClientByUsername(principal.getName());
+        var activeOrders = orderService.getActiveOrdersByClient(client);
+        var finishedOrders = orderService.getFinishedOrdersByClient(client);
+        model.addAttribute("activeOrders", activeOrders);
+        model.addAttribute("finishedOrders", finishedOrders);
+        return "client-orders";
+    }
+
+    @RequestMapping("/goBack")
+    public String goBack(HttpServletRequest request) {
+        var referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 }

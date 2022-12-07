@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+</head>
+<body>
+<h1>Orders</h1>
+<br>
+<h2>Active orders</h2>
+<table th:border="1">
+    <tbody>
+    <tr>
+        <td>Room</td>
+        <td>Date Start</td>
+        <td>Date End</td>
+        <td>Guests Count</td>
+        <td>Cost</td>
+        <td>Status</td>
+    </tr>
+    <tr th:each="order: ${activeOrders}">
+        <td th:text="${order.roomDto.roomTypeDto.name}"/>
+        <td th:text="${order.ds}"/>
+        <td th:text="${order.de}"/>
+        <td th:text="${order.guestsCount}"/>
+        <td th:text="${order.cost}"/>
+        <td th:text="${order.orderStatusDto.name}"/>
+    </tr>
+    </tbody>
+</table>
+<h3>Finished orders</h3>
+<table th:border="1">
+    <tbody>
+    <tr>
+        <td>Room</td>
+        <td>Date Start</td>
+        <td>Date End</td>
+        <td>Guests Count</td>
+        <td>Cost</td>
+        <td>Status</td>
+    </tr>
+    <tr th:each="order: ${finishedOrders}">
+        <td th:text="${order.roomDto.roomTypeDto.name}"/>
+        <td th:text="${order.ds}"/>
+        <td th:text="${order.de}"/>
+        <td th:text="${order.guestsCount}"/>
+        <td th:text="${order.cost}"/>
+        <td th:text="${order.orderStatusDto.name}"/>
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+<br>
+<input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'">
+<br>
+<input type="button" value="Main Page" onclick="window.location.href='/'">
+</body>
+</html>

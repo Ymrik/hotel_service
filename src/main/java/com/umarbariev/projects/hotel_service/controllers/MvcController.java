@@ -6,6 +6,7 @@ import com.umarbariev.projects.hotel_service.dto.client.UserClientDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
 import com.umarbariev.projects.hotel_service.dto.user.UserDto;
 import com.umarbariev.projects.hotel_service.entities.User;
+import com.umarbariev.projects.hotel_service.service.additionalService.AdditionalServiceService;
 import com.umarbariev.projects.hotel_service.service.client.ClientService;
 import com.umarbariev.projects.hotel_service.service.client.SexService;
 import com.umarbariev.projects.hotel_service.service.order.OrderService;
@@ -37,12 +38,16 @@ public class MvcController {
     private UserService userService;
     @Autowired
     private SexService sexService;
+    @Autowired
+    private AdditionalServiceService additionalServiceService;
 
     @RequestMapping("/")
     public String index(Model model, Principal principal) {
         var availableRoomsTypes = roomService.getAllAvailableRoomTypes();
+        var services = additionalServiceService.getAllEnabledServices();
         model.addAttribute("availableRoomTypes", availableRoomsTypes);
         model.addAttribute("searchCriteria", new SearchCriteriaDto());
+        model.addAttribute("services", services);
         model.addAttribute("user", principal);
         return "index";
     }
@@ -170,9 +175,10 @@ public class MvcController {
         return "client-orders";
     }
 
-    @RequestMapping("/goBack")
-    public String goBack(HttpServletRequest request) {
-        var referer = request.getHeader("Referer");
-        return "redirect:"+ referer;
+    @RequestMapping("/serviceDetails")
+    public String serviceDetails(@RequestParam(name = "serviceId") int serviceId, Model model) {
+        var service = additionalServiceService.getServiceById(serviceId);
+        model.addAttribute("service", service);
+        return "service-details";
     }
 }

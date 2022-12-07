@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Details</title>
+</head>
+<body>
+<h1>Service details</h1>
+<p th:text="'Name: ' + ${service.name}"></p>
+<p th:text="'Description: ' + ${service.description}"></p>
+<p th:text="'Price: ' + ${service.basePrice}"></p>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+<p><input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'"></p>
+<p><input type="button" value="Main Menu" onclick="window.location.href='/'"></p>
+</body>
+</html>

@@ -58,6 +58,29 @@
     </tbody>
 </table>
 <h3>Service</h3>
+<table th:border="1">
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Buy</td>
+    </tr>
+    <tr th:each="service: ${services}">
+        <td>
+            <b th:text="${service.name}"></b>
+            <a th:href="@{/serviceDetails(serviceId=*{service.id})}">
+                <input type="button" value="Details"/>
+            </a>
+        </td>
+        <td th:text="${service.basePrice}"/>
+        <td>
+            <a th:href="@{/buyService(serviceId=*{service.id})}">
+                <input type="button" value="Buy"/>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 <h3>Special offers</h3>
 </body>
 </html>

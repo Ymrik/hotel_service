@@ -1,10 +1,8 @@
 package com.umarbariev.projects.hotel_service.entities.additionalService;
 
-import com.umarbariev.projects.hotel_service.entities.additionalService.AdditionalService;
 import com.umarbariev.projects.hotel_service.entities.client.Client;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Table(name = "clients_additional_services")
@@ -19,10 +17,8 @@ public class ClientAdditionalService {
     @ManyToOne
     @JoinColumn(name = "additional_service_id")
     private AdditionalService additionalService;
-    @Column(name = "ds")
-    private Date ds;
-    @Column(name = "de")
-    private Date de;
+    @Column(name = "cost")
+    private Double cost;
 
     public int getId() {
         return id;
@@ -44,23 +40,15 @@ public class ClientAdditionalService {
         return additionalService;
     }
 
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
     public void setAdditionalService(AdditionalService additionalService) {
         this.additionalService = additionalService;
-    }
-
-    public Date getDs() {
-        return ds;
-    }
-
-    public void setDs(Date ds) {
-        this.ds = ds;
-    }
-
-    public Date getDe() {
-        return de;
-    }
-
-    public void setDe(Date de) {
-        this.de = de;
     }
 }

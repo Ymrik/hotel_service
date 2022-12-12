@@ -1,4 +1,4 @@
-package com.umarbariev.projects.hotel_service.dto;
+package com.umarbariev.projects.hotel_service.dto.additionalService;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

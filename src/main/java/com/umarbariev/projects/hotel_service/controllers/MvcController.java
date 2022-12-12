@@ -1,12 +1,15 @@
 package com.umarbariev.projects.hotel_service.controllers;
 
+import com.umarbariev.projects.hotel_service.dto.additionalService.AdditionalServiceDto;
 import com.umarbariev.projects.hotel_service.dto.SearchCriteriaDto;
+import com.umarbariev.projects.hotel_service.dto.additionalService.ClientAdditionalServiceDto;
 import com.umarbariev.projects.hotel_service.dto.client.ClientDto;
 import com.umarbariev.projects.hotel_service.dto.client.UserClientDto;
 import com.umarbariev.projects.hotel_service.dto.order.OrderRequest;
 import com.umarbariev.projects.hotel_service.dto.user.UserDto;
 import com.umarbariev.projects.hotel_service.entities.User;
 import com.umarbariev.projects.hotel_service.service.additionalService.AdditionalServiceService;
+import com.umarbariev.projects.hotel_service.service.additionalService.ClientAdditionalServiceService;
 import com.umarbariev.projects.hotel_service.service.client.ClientService;
 import com.umarbariev.projects.hotel_service.service.client.SexService;
 import com.umarbariev.projects.hotel_service.service.order.OrderService;
@@ -21,7 +24,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Controller
@@ -40,6 +42,8 @@ public class MvcController {
     private SexService sexService;
     @Autowired
     private AdditionalServiceService additionalServiceService;
+    @Autowired
+    private ClientAdditionalServiceService clientAdditionalServiceService;
 
     @RequestMapping("/")
     public String index(Model model, Principal principal) {
@@ -170,15 +174,34 @@ public class MvcController {
         var client = clientService.findClientByUsername(principal.getName());
         var activeOrders = orderService.getActiveOrdersByClient(client);
         var finishedOrders = orderService.getFinishedOrdersByClient(client);
+        var services = clientAdditionalServiceService.getAllByClient(client);
+        model.addAttribute("clientServices", services);
         model.addAttribute("activeOrders", activeOrders);
         model.addAttribute("finishedOrders", finishedOrders);
         return "client-orders";
     }
 
     @RequestMapping("/serviceDetails")
-    public String serviceDetails(@RequestParam(name = "serviceId") int serviceId, Model model) {
+    public String serviceDetails(@RequestParam(name = "serviceId") int serviceId, Model model, Principal principal) {
         var service = additionalServiceService.getServiceById(serviceId);
-        model.addAttribute("service", service);
+        var client = clientService.findClientByUsername(principal.getName());
+        var clientAdditionalService = clientAdditionalServiceService.create(client, service);
+        model.addAttribute("clientService", clientAdditionalService);
         return "service-details";
+    }
+
+    @RequestMapping("/infoBuyService")
+    public String infoBuyService(@RequestParam(name = "serviceId") int serviceId, Model model, Principal principal) {
+        var service = additionalServiceService.getServiceById(serviceId);
+        var client = clientService.findClientByUsername(principal.getName());
+        var clientAdditionalService = clientAdditionalServiceService.create(client, service);
+        model.addAttribute("clientService", clientAdditionalService);
+        return "buy-service";
+    }
+
+    @RequestMapping("/buyService")
+    public String buyService(@ModelAttribute ClientAdditionalServiceDto clientService) {
+        clientAdditionalServiceService.buyService(clientService);
+        return "redirect:/";
     }
 }

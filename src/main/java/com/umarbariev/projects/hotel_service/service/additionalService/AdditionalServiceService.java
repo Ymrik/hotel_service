@@ -1,6 +1,8 @@
 package com.umarbariev.projects.hotel_service.service.additionalService;
 
-import com.umarbariev.projects.hotel_service.dto.AdditionalServiceDto;
+import com.umarbariev.projects.hotel_service.dto.additionalService.AdditionalServiceDto;
+import com.umarbariev.projects.hotel_service.dto.additionalService.ClientAdditionalServiceDto;
+import com.umarbariev.projects.hotel_service.entities.additionalService.ClientAdditionalService;
 import com.umarbariev.projects.hotel_service.repositories.additionalService.AdditionalServiceRepository;
 import com.umarbariev.projects.hotel_service.util.converters.BasicConverter;
 import org.springframework.beans.factory.annotation.Autowired;

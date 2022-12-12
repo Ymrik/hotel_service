@@ -74,13 +74,12 @@
         </td>
         <td th:text="${service.basePrice}"/>
         <td>
-            <a th:href="@{/buyService(serviceId=*{service.id})}">
+            <a th:href="@{/infoBuyService(serviceId=*{service.id})}">
                 <input type="button" value="Buy"/>
             </a>
         </td>
     </tr>
     </tbody>
 </table>
-<h3>Special offers</h3>
 </body>
 </html>

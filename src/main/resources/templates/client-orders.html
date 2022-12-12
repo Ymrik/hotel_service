@@ -49,6 +49,19 @@
     </tr>
     </tbody>
 </table>
+<h3>Services</h3>
+<table th:border="1">
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td>Cost</td>
+    </tr>
+    <tr th:each="clientService: ${clientServices}">
+        <td th:text="${clientService.additionalService.name}"/>
+        <td th:text="${clientService.cost}"/>
+    </tr>
+    </tbody>
+</table>
 <br>
 <input type="button" value="Go back" onclick="goBack()">
 <script id="scr">

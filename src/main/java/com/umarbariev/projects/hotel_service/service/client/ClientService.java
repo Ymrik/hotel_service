@@ -47,7 +47,7 @@ public class ClientService {
         var currentStatus = clientDto.getLoyaltyStatusDto();
         infoForNextLoyalStatus.setClient(clientDto);
         infoForNextLoyalStatus.setCurrent(currentStatus);
-        if (currentStatus.getId() == 5) return infoForNextLoyalStatus;
+        if (currentStatus.getId() == 6) return infoForNextLoyalStatus;
         var ordersCount = orderService.getOrdersCountForClient(clientDto);
         var nextLoyaltyStatus = loyaltyStatusService.getLoyaltyStatusById(currentStatus.getId() + 1);
         infoForNextLoyalStatus.setCurrentOrdersCount(ordersCount);

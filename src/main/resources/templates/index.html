@@ -24,9 +24,9 @@
 <br>
 <h4>Find a Room</h4>
 <form th:action="@{/findRoom}" th:object="${searchCriteria}" method="get">
-    Arrival <input type="date" th:field="*{arrivalDate}">
-    Departure <input type="date" th:field="*{departureDate}">
-    Guests <input type="text" th:field="*{guestsCount}">
+    Arrival <input type="date" th:field="*{arrivalDate}" th:required="true">
+    Departure <input type="date" th:field="*{departureDate}" th:required="true">
+    Guests <input type="text" th:field="*{guestsCount}" th:required="true">
     <input type="submit" value="Find room"/>
 </form>
 <h3>Available rooms</h3>
@@ -37,7 +37,9 @@
         <td>Square</td>
         <td>Capacity</td>
         <td>Base price</td>
+        <div sec:authorize="isAuthenticated()">
         <td>Order</td>
+        </div>
     </tr>
     <tr th:each="roomType: ${availableRoomTypes}">
         <td>
@@ -49,11 +51,13 @@
         <td th:text="${roomType.square}"/>
         <td th:text="${roomType.capacity}"/>
         <td th:text="${roomType.basePrice}"/>
+        <div sec:authorize="isAuthenticated()">
         <td>
             <a th:href="@{/makeOrder(roomTypeId=*{roomType.id})}">
                 <input type="button" value="Order"/>
             </a>
         </td>
+        </div>
     </tr>
     </tbody>
 </table>
@@ -63,21 +67,25 @@
     <tr>
         <td>Name</td>
         <td>Price</td>
+        <div sec:authorize="isAuthenticated()">
         <td>Buy</td>
+        </div>
     </tr>
     <tr th:each="service: ${services}">
         <td>
             <b th:text="${service.name}"></b>
-            <a th:href="@{/serviceDetails(serviceId=*{service.id})}">
-                <input type="button" value="Details"/>
-            </a>
+<!--            <a th:href="@{/serviceDetails(serviceId=*{service.id})}">-->
+<!--                <input type="button" value="Details"/>-->
+<!--            </a>-->
         </td>
         <td th:text="${service.basePrice}"/>
+        <div sec:authorize="isAuthenticated()">
         <td>
             <a th:href="@{/infoBuyService(serviceId=*{service.id})}">
                 <input type="button" value="Buy"/>
             </a>
         </td>
+        </div>
     </tr>
     </tbody>
 </table>

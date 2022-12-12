@@ -48,7 +48,7 @@ public class UserClientDto {
                 .sexDto(SexDto.getSexDto(sex))
                 .phoneNumber(phoneNumber)
                 .email(email)
-                .loyaltyStatusDto(LoyaltyStatusDto.LEVEL_1)
+                .loyaltyStatusDto(LoyaltyStatusDto.LEVEL_0)
                 .build();
     }
 }

@@ -10,17 +10,17 @@
     <input type="hidden" th:field="*{id}">
     <input type="hidden" th:field="*{userDto.username}">
     <input type="hidden" th:field="*{loyaltyStatusDto.id}">
-    <p>Name: <input type="text" th:field="*{name}"></p>
-    <p>Surname: <input type="text" th:field="*{surname}"></p>
-    <p>Birth Date: <input type="date" th:field="*{birthDate}"></p>
+    <p>Name: <input type="text" th:field="*{name}" th:required="true"></p>
+    <p>Surname: <input type="text" th:field="*{surname}" th:required="true"></p>
+    <p>Birth Date: <input type="date" th:field="*{birthDate}" th:required="true"></p>
     <p>
-        Sex: <select th:field="*{sexDto.name}">
+        Sex: <select th:field="*{sexDto.name}" th:required="true">
         <option th:value="Male" th:text="Male"></option>
         <option th:value="Female" th:text="Female"></option>
     </select>
     </p>
-    <p>Phone Number: <input type="text" th:field="*{phoneNumber}"></p>
-    <p>Email: <input type="text" th:field="*{email}"></p>
+    <p>Phone Number: <input type="text" th:field="*{phoneNumber}" th:required="false"></p>
+    <p>Email: <input type="text" th:field="*{email}" th:required="false"></p>
     <p>
         <input type="submit" value="OK">
     </p>

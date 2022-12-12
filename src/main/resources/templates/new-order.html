@@ -18,9 +18,9 @@
 <h3>Please, specify order details</h3>
 <form th:action="@{/newOrder}" th:object="${orderRequest}">
     <input type="hidden" th:field="*{roomTypeId}">
-    <p>Check-In Date: <input type="date" th:field="*{checkInDate}"></p>
-    <p>Check-Out Date: <input type="date" th:field="*{checkOutDate}"></p>
-    <p>Guests: <input type=text th:field="*{guestsCount}"></p>
+    <p>Check-In Date: <input type="date" th:field="*{checkInDate}" th:required="true"></p>
+    <p>Check-Out Date: <input type="date" th:field="*{checkOutDate}" th:required="true"></p>
+    <p>Guests: <input type=text th:field="*{guestsCount}" th:required="true"></p>
     <input type="submit" value="Make Order">
 </form>
 <br>

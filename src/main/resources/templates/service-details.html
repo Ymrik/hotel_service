@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Details</title>
+</head>
+<body>
+<h1>Service details</h1>
+<p th:text="'Name: ' + ${clientService.additionalService.name}"></p>
+<p th:text="'Description: ' + ${clientService.additionalService.description}"></p>
+<p th:text="'Price: ' + ${clientService.additionalService.basePrice}"></p>
+<p th:text="'Price with your Loyalty Status discount: ' + ${clientService.cost}"></p>
+<br>
+<form th:action="@{/buyService}" th:object="${clientService}">
+    <input th:type="hidden" th:field="*{client.id}">
+    <input th:type="hidden" th:field="*{additionalService.id}">
+    <input th:type="hidden" th:field="*{cost}">
+    <input type="submit" value="Buy">
+</form>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+<p><input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'"></p>
+<p><input type="button" value="Main Menu" onclick="window.location.href='/'"></p>
+</body>
+</html>

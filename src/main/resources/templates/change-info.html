@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Info</title>
+</head>
+<body>
+<h1>Change Personal Info</h1>
+<form th:object="${client}" th:action="@{/updateClient}">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{userDto.username}">
+    <input type="hidden" th:field="*{loyaltyStatusDto.id}">
+    <p>Name: <input type="text" th:field="*{name}" th:required="true"></p>
+    <p>Surname: <input type="text" th:field="*{surname}" th:required="true"></p>
+    <p>Birth Date: <input type="date" th:field="*{birthDate}" th:required="true"></p>
+    <p>
+        Sex: <select th:field="*{sexDto.name}" th:required="true">
+        <option th:value="Male" th:text="Male"></option>
+        <option th:value="Female" th:text="Female"></option>
+    </select>
+    </p>
+    <p>Phone Number: <input type="text" th:field="*{phoneNumber}" th:required="false"></p>
+    <p>Email: <input type="text" th:field="*{email}" th:required="false"></p>
+    <p>
+        <input type="submit" value="OK">
+    </p>
+</form>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+</body>
+</html>

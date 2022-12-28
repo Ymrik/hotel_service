@@ -18,13 +18,17 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_authorities",
             joinColumns = {@JoinColumn(name = "username")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id")}
     )
     private List<Authority> authorities;
+
+    public boolean hasRole(String role){
+        return authorities.stream().anyMatch(x->x.getAuthority().equals(role));
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

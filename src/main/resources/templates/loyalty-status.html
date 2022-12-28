@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Loyalty Status</title>
+</head>
+<body>
+<h1>Loyalty Status</h1>
+<h3 th:text="'Dear, ' + ${client.name} + '. Your Current Loyalty Status is ' + ${infoForNextStatus.current.name}"></h3>
+<p th:text="'Your total orders count is ' + ${infoForNextStatus.currentOrdersCount}"></p>
+<p th:text="'Your discount is ' +  ${infoForNextStatus.current.discount} + ' %'"></p>
+<p th:text="'Next Loyalty Status is ' + ${infoForNextStatus.next.name}"></p>
+<p th:text="'Order until Loyalty Status:' + ${infoForNextStatus.next.name} + ' - ' + ${infoForNextStatus.ordersForNextStatus}"></p>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+<br>
+<input type="button" value="Personal Account" onclick="window.location.href='/personalAccount'">
+<br>
+<input type="button" value="Main Page" onclick="window.location.href='/'">
+
+</body>
+</html>

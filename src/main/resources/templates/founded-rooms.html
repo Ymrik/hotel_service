@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Find room</title>
+</head>
+<body>
+<h1>Suitable rooms</h1>
+<table th:border="1">
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td>Square</td>
+        <td>Capacity</td>
+        <td>Base price</td>
+    </tr>
+    <tr th:each="roomType: ${foundedRoomTypes}">
+        <td>
+            <b th:text="${roomType.name}"></b>
+            <a th:href="@{/roomDetails(roomTypeId=*{roomType.id})}">
+                <input type="button" value="Details"/>
+            </a>
+        </td>
+        <td th:text="${roomType.square}"/>
+        <td th:text="${roomType.capacity}"/>
+        <td th:text="${roomType.basePrice}"/>
+        <div>
+        <td sec:authorize="isAuthenticated()">
+            <form th:action="@{/makeOrder}" th:object="${orderRequest}">
+                <input type="hidden" th:field="*{checkInDate}">
+                <input type="hidden" th:field="*{checkOutDate}">
+                <input type="hidden" th:field="*{guestsCount}">
+                <input type="hidden" class="form-control" th:value="${roomType.id}" id="roomTypeId" name="roomTypeId">
+                <input type="submit" value="Order">
+            </form>
+        </td>
+        </div>
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+</body>
+</html>

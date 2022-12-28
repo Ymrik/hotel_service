@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New order</title>
+</head>
+<body>
+<h1>New order</h1>
+<h3>Choosed Room</h3>
+<p th:text="${roomType.name}"></p>
+<p th:text="'Class: ' + ${roomType.roomClassDto.name}"></p>
+<p th:text="'Square: ' + ${roomType.square}"></p>
+<p th:text="'Capacity: ' + ${roomType.capacity}"></p>
+<a th:href="@{/roomDetails(roomTypeId=*{roomType.id})}">
+    <input type="button" value="Details"/>
+</a>
+<br>
+<h3>Please, specify order details</h3>
+<form th:action="@{/newOrder}" th:object="${orderRequest}">
+    <input type="hidden" th:field="*{roomTypeId}">
+    <p>Check-In Date: <input type="date" th:field="*{checkInDate}" th:required="true"></p>
+    <p>Check-Out Date: <input type="date" th:field="*{checkOutDate}" th:required="true"></p>
+    <p>Guests: <input type=text th:field="*{guestsCount}" th:required="true"></p>
+    <input type="submit" value="Make Order">
+</form>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+</body>
+</html>

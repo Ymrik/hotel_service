@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Reservation</title>
+</head>
+<body>
+<h1>Room Reservation</h1>
+<h3>Please choose Room</h3>
+    <table th:border="1">
+        <tbody>
+        <tr>
+            <td>Name</td>
+            <td>Square</td>
+            <td>Capacity</td>
+            <td>Base price</td>
+            <td>Order</td>
+        </tr>
+        <tr th:each="roomType: ${availableRoomTypes}">
+            <td>
+                <b th:text="${roomType.name}"></b>
+                <a th:href="@{/roomDetails(roomTypeId=*{roomType.id})}">
+                    <input type="button" value="Details"/>
+                </a>
+            </td>
+            <td th:text="${roomType.square}"/>
+            <td th:text="${roomType.capacity}"/>
+            <td th:text="${roomType.basePrice}"/>
+            <td>
+                <a th:href="@{/makeOrder(roomTypeId=*{roomType.id})}">
+                    <input type="button" value="Order"/>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+</body>
+</html>

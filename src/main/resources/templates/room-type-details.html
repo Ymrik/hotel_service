@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RoomDetails</title>
+</head>
+<body>
+<h1>Room details</h1>
+<p th:text="${roomType.name}"></p>
+<p th:text="'Class: ' + ${roomType.roomClassDto.name}"></p>
+<p th:text="${roomType.roomClassDto.description}"></p>
+<p th:text="'Square: ' + ${roomType.square}"></p>
+<p th:text="'Capacity: ' + ${roomType.capacity}"></p>
+<h3>Features</h3>
+<h4>In room</h4>
+<table th:border="1">
+    <tbody>
+    <tr th:each="roomFeature : ${roomType.roomFeaturesDto}">
+        <td th:if="${roomFeature.roomFeatureTypeDto.name == 'In room'}" th:text="${roomFeature.name}"></td>
+    </tr>
+    </tbody>
+</table>
+<h4>In Bathroom</h4>
+<table th:border="1">
+    <tbody>
+    <tr th:each="roomFeature : ${roomType.roomFeaturesDto}">
+        <td th:if="${roomFeature.roomFeatureTypeDto.name == 'In Bathroom'}" th:text="${roomFeature.name}"></td>
+    </tr>
+    </tbody>
+</table>
+<h4>Other</h4>
+<table th:border="1">
+    <tbody>
+    <tr th:each="roomFeature : ${roomType.roomFeaturesDto}">
+        <td th:if="${roomFeature.roomFeatureTypeDto.name == 'Other'}" th:text="${roomFeature.name}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" value="Go back" onclick="goBack()">
+<script id="scr">
+    function goBack() {
+        history.go(-1)
+    }
+</script>
+</body>
+</html>
